@@ -1,0 +1,116 @@
+create table cust_vehicle(tid number primary key,Custid number not null,vid number not null,
+			  sid number not null,Buy_price number not null check(Buy_price>0));
+
+insert into cust_vehicle values(1,1,1,10,75000);
+insert into cust_vehicle values(2,1,2,10,790000);
+insert into cust_vehicle values(3,2,3,11,80000);
+insert into cust_vehicle values(4,3,3,11,75000);
+insert into cust_vehicle values(5,3,2,10,800000);
+
+alter table Cust_vehicle add rating number;
+update Cust_vehicle set rating=5;
+
+select * from Cust_vehicle;
+select * from custome;
+select * from salesman;
+select * from vehicle;
+
+---alter the constraints of  customer,salesman,vehicle;
+
+alter table custome modify custid number primary key;
+alter table salesman modify sid number primary key;
+alter table vehicle modify vid number primary key;
+--------------------------------------------------------
+alter table Cust_vehicle add constraint k foreign key(vid) references vehicle(vid);
+alter table Cust_vehicle add constraint x foreign key(sid) references salesman(sid);
+alter table Cust_vehicle add constraint z foreign key(vid) references custome(custid);
+-------------------------------------------------------------------------------------
+select Cust_vehicle.tid,Cust_vehicle.vid,Cust_vehicle.sid,salesman.sname from Cust_vehicle,salesman where Cust_vehicle.sid=salesman.sid; 
+
+select Cust_vehicle.tid,Cust_vehicle.vid,Cust_vehicle.sid,vehicle.price from Cust_vehicle,vehicle where Cust_vehicle.vid=vehicle.vid; 
+
+select Cust_vehicle.tid,Cust_vehicle.custid,custome.cname,Cust_vehicle.vid,vehicle.vname,Cust_vehicle.sid,salesman.sname,Cust_vehicle.Buy_price from Cust_vehicle,vehicle,salesman,custome where Cust_vehicle.vid=vehicle.vid and Cust_vehicle.sid=salesman.sid and Cust_vehicle.custid=custome.custid; 
+
+------------------------------------------------------------------------------------------------------------------------------------------------
+Assignment new ----
+==============
+select * from emp where sal>2000 and comm>200;
+
+select * from emp where job='Clerk' or sal>2000;
+select * from emp where sal in(1250,1100);
+select * from emp where sal between 1250 and 2850;
+select  ename,sal,deptno from emp where deptno=20;
+select ename from emp where hiredate>'09-Jun-1981';
+select empno,empname,sal,comm,comm+sal "Total sal" from emp;
+Select job from emp where job='CLERK' and sal>2000;
+alter table emp add new_sal number;
+update emp set new_sal=sal+sal*0.2;
+
+create table emp111 as select * from emp;
+
+create table dept11 as select * from dept; 
+
+alter table dept11 add constraint dk primary key(deptno);
+
+create table emp110 as select * from emp where deptno=10;
+----get table Strructure of this not data
+#create table emp1110 as select * from emp where 1=2;
+
+alter table emp110 add constraint yj primary key(empno);
+alter table emp110 add constraint yjj foreign key(deptno) references dept(deptno);
+
+update emp set mgr=nvl(mgr,0);
+
+alter table emp drop constraint mgr;
+
+select * from emp where mgr is null;
+
+create table trainer(tid number primary key,tname varchar2(20) not null,cid number,foreign key(cid) references course(cid) on delete set null); 
+insert into trainer values(1,'Amey',101);
+insert into trainer values(2,'bAGGA',101);
+insert into trainer values(3,'bEIROO',103);
+insert into trainer values(4,'Tyapa',102);
+insert into trainer values(5,'genghis ',103);
+
+
+
+
+
+
+
+
+create table course(cid number primary key,cname varchar2(20));
+insert into course values(101,'Aman');
+insert into course values(102,'Mitra');
+
+insert into course values(103,'Barwin');
+
+insert into course values(104,'Chapda');
+
+insert into course values(105,'mitin');
+
+
+select trainer.tname,course.cid,course.cname from course,trainer where trainer.cid=course.cid;
+
+
+
+
+
+alter table course add fees number;
+
+
+update emp set sal=sal+0.15,job=777 where deptno in 10;
+
+create table duemp as select * from emp;
+update duemp set sal=sal+0.15,job=777 where deptno in 10;
+
+
+
+
+
+
+
+
+
+
+

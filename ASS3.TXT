@@ -1,0 +1,71 @@
+create table trainer1(tid number primary key,tname varchar2(20) not null,cid number,foreign key(cid) references course(cid) on delete set null); 
+insert into trainer1 values(1,' Amey ',101);
+insert into trainer1 values(2,'bAGGA',101);
+insert into trainer1 values(3,'bEIROO',103);
+insert into trainer1 values(4,'Tyapa',102);
+insert into trainer1 values(5,'genghis ',103);
+
+select * from emp where ename like '%R';
+select * from emp where regexp_like(ename,'^R'); ---first element r
+-------------------------------------------------------------------------
+as1->select * from emp where regexp_like(ename,'R$');
+
+as2->select * from emp where ename like 'M%R';
+
+as3->select * from emp where ename like '__L%';
+ 
+as4->select * from emp where ename like 'M__L%R%';
+
+as5->select * from emp where ename like '__L%E_%';
+
+as6->select * from emp where regexp_like(ename,'^[MA]') ORDER BY ENAME;
+
+as7->select * from emp where regexp_like(ename,'^[MA].*[RN]$');
+
+as8->select * from emp where regexp_like(ename,'^[MA].*E$');
+
+as9->select * from emp where regexp_like(ename,'^A.*N$');
+
+as10->select * from emp where regexp_like(ename,'^[^N]');
+
+as11->select * from emp where sal between 1000 and 3000 and regexp_like(job,'^A.*T$');
+
+as12->select empno,ename,sal,sal+0.1*sal as increased_Sal,comm from emp where regexp_like(ename,'^[AMS]');
+
+as13->select * from emp where regexp_like(ename,'^[NS]') or deptno=10;
+
+as14->select * from emp where regexp_like(ename,'^[A-Z a-z]') and length(ename)>=5;
+
+as15->select * from emp where mod(sal,3)=0;
+
+as16->select ename||'****'||sal from emp;
+
+as17->select upper(ename)||'@mycompany.com' from emp;
+
+as18->select upper(substr(ename,1,3))||'.'||substr(job,2,3)||'@mycompany' from emp;
+
+as19->select 'hello '||substr(ename,1,1)||'!' as commearner from emp where comm>0;
+
+as20->select lpad(ename,10,' ') from emp where length(ename)<10;
+
+as21->select upper(ename)||' is a '||lower(job) as namejob from emp;
+
+as22->select empno||','||ename||','||mgr||','||hiredate||','||sal||','||comm||','||deptno||','||bonusid from emp;
+
+as23->select sum(sal) as sum from emp;
+
+as24->select count(job) as no_of_analyst from emp where job='ANALYST';
+
+as25->select max(sal) as max,min(sal) as min,sum(sal) as sum from emp where sal between 1500 and 3000;
+
+as26->select ename,sal from dept order by sal desc;
+
+as27->select dname,deptno order by deptno;---not available in dept10
+
+as27->select ename,deptno from emp where hiredate between '01-JAN-1981' and'31-MAR-1983';
+
+as28->select * from emp where regexp_like(ename,'^A.*S$|^.N|^..N') ORDER BY hiredate;
+
+as29->select concat('Hello ',substr(ename,1,3))||lower(substr(ename,4,5)) from emp;
+
+as30->select sum(sal) as sum,avg(sal) as avg,sum(sal+comm) as netsal from emp;

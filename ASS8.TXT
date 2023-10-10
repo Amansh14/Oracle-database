@@ -1,0 +1,92 @@
+ PID PNAME                     PRICE        QTY        CID        SID
+---------- -------------------- ---------- ---------- ---------- ----------
+       123 lays                         30         30          1         12
+       111 pepsi                        40         50          4         11
+       134 nachos                       50         50          1         12
+       124 dairy milk                   40         60          2         14
+       125 pringles                     40         60          1         14
+
+ SID SNAME           CITY
+---------- --------------- ---------------
+        11 Rahul           Pune
+        12 Kirti           Mumbai
+        13 Prasad          Nashik
+        14 Arnav           Amravati
+
+ CID CNAME           DESCRIPTION
+---------- --------------- ------------------------------
+         1 chips           crunchy
+         2 chocolate       very chocolaty
+         3 snacks          yummy
+         4 cold drinks     thanda thanda cool cool
+
+1.select p.pid,p.pname,c.cname from product p inner join category c on p.cid=c.cid where c.cname='chips';
+
+
+2.select s.sname,s.sid,p.pname from salesma s inner join product p on s.sid=p.sid where lower(s.sname)='kirti'; 
+
+3.select s.sname from salesma s where s.sid not in(select p.sid from product p);
+4.display all category for which no product is assigned--->
+
+select category.cname from category where category.cid not in(select product.cid from product);
+
+6.select sname from salesma where city in (select city from salesma where regexp_like(city,'^[PN]'));
+
+7.alter table salesma add credit_limit number;
+
+8.select instr('HELLLLLLL','L','1','2') FROM DUAL;
+
+9.SELECT ENAME,JOB FROM EMP WHERE SUBSTR(JOB,1,LENGTH(JOB))='MAN';
+SELECT ENAME,JOB FROM EMP WHERE INSTR(JOB,'MAN')>=1;
+
+10.select p.pid,p.pname,p.qty,p.price,p.cid,c.cname from product p full join category c on p.cid=c.cid;
+
+11.select p.pid,p.pname,p.qty,p.price,p.cid,s.sid,s.city from product p full join salesma s on p.sid=s.sid;
+
+12.select e.empno,e.ename,d.deptno,d.dname from emp e left join dept d on e.deptno=d.deptno;
+
+13.select * from salgrade1;
+
+     GRADE      LOSAL      HISAL
+---------- ---------- ----------
+         4       2001       3000
+         2       1201       1400
+         3       1401       2000
+         5       3001       4000
+         8       6001       7000
+         9       7001       8000
+         1        700       1200
+         7       5001       6000
+         6       4001       5000
+        10       8001       9999
+
+select e.empno,e.ename,e.deptno,e.sal,s.grade from emp e,salgrade1 s where e.sal between s.losal and hisal;
+
+14.select e.empno,e.ename,e.mgr,e.mgr,m.ename from emp e inner join emp m on e.mgr=m.empno;
+
+15.insert into emp(empno,ename,deptno) values(9999,'POOJA',90);
+SELECT E.ENAME,E.DEPTNO   FROM EMP E INNER JOIN DEPT00 D ON E.DEPTNO=D.DEPTNO WHERE 
+E.DEPTNO IS NOT NULL;
+ENAME            DEPTNO
+------------ ----------
+KING                 10
+BLAKE                30
+CLARK                10
+JONES                20
+MARTIN               30
+ALLEN                30
+TURNER               30
+JAMES                30
+WARD                 30
+FORD                 20
+SMITH                20
+SCOTT                20
+ADAMS                20
+MILLER               10
+ALEX                 30
+ALIBABA              30
+ABRAMA               10
+CREATE TABLE DEPT00 AS SELECT * FROM DEPT; 
+
+16.insert into dept00(deptno,dname) values (80,'Training');
+SELECT E.ENAME,E.DEPTNO,D.DNAME FROM EMP E FULL JOIN DEPT00 D ON E.DEPTNO=D.DEPTNO;

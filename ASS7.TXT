@@ -1,0 +1,53 @@
+1.select * from emp where sal >(select sal from emp where job='MANAGER');
+
+2.select * from emp e where sal>(select avg(sal) from emp d where e.deptno=d.deptno);
+
+3.select deptno,dname from dept where deptno not in (select deptno from emp);
+
+4.insert into faculty values(10,'Amol','database','JAVA');
+  insert into faculty values(11,'ASHA','java','MYSQL');
+  insert into faculty values(12,'Kiran','cpp','DATABASE');
+  insert into faculty values(13,'Seeta','mysql','DATABASE');
+
+=====================================================================
+
+AFTER TABLE-----------------------------------------------------
+
+ select * from courses;
+
+       CID CNAME                  RID        FID
+---------- --------------- ---------- ----------
+       121 DBDA                   100         10
+       131 DAC                    101
+       141 DTISS
+       151 DIOT                   105         12
+
+SQL> select * from room;
+
+       RID RNAME           RLOC
+---------- --------------- --------------------
+       100 Jasmin          1st floor
+       101 Rose            2nd floor
+       105 Lotus           1st floor
+       103 Mogra           1st floor
+
+select * from faculty;
+
+       FID FNAME                SP_SKILL1                      SP_SKILL2
+---------- -------------------- ------------------------------ ------------------------------
+        10 Amol                 database                       JAVA
+        11 ASHA                 java                           MYSQL
+        12 Kiran                cpp                            DATABASE
+        13 Seeta                mysql                          DATABASE
+
+1.select c.cname,r.rname from courses c full join room r on c.rid=r.rid where c.fid is null;
+
+2.select * from faculty f where fid not in(select fid from courses c where f.fid=c.fid);
+
+3.select r.rname,c.cname,r.rid from room r full join courses c on r.rid=c.rid where c.rid is not null;
+
+4.select r.rname,c.cname,r.rid from room r full join courses c on r.rid=c.rid where c.rid is null;
+
+5.select c.fid,c.cname,f.fname from courses c inner join faculty f on c.fid=f.fid where f.sp_skill1='database' or f.sp_skill2='DATABASE';
+or
+select c.cid,c.cname,c.fid,f.fname from courses c,faculty f  where c.fid in (select f.fid from faculty f where sp_skill1='database' or sp_skill2='DATABASE' and c.fid=f.fid);

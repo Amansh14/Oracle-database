@@ -1,0 +1,34 @@
+41->select sum(sal),deptno from emp group by deptno;
+
+42->select max(sal) as max,min(sal) as min,avg(sal) as avg,deptno from emp group by deptno;
+
+43->select deptno,sum(sal) from emp where sal>1500 group by deptno ;
+
+44->select count(job),deptno from emp where lower(job)='clerk' group by deptno;
+
+45->select count(mgr),mgr  from emp group by mgr; 
+
+46->select job,avg(sal) from emp group by job having avg(sal)>2000;
+
+47->select count(job),job from emp group by job; 
+
+48->select count(mgr),mgr from emp group by mgr having count(job)>2;
+
+49->select job,count(job) from emp where sal>1500 group by job;
+
+410->select max(count)  from emp;
+
+411->select min(sal),max(sal),max(sal)-min(sal) as diff from emp where deptno=20 group by deptno;
+or
+select min(sal),max(sal),max(sal)-min(sal) as diff from emp group by deptno having deptno=20;
+
+412a->select ename from emp where deptno=20 or deptno=30 group by ename having count(comm)=0;
+
+412b->( select  to_char(hiredate,'YYYY') as year,count(empno) as c from emp group by hiredate);--------------------to be correct
+
+413->select deptno,sum(sal) as total_sal from emp group by deptno having sum(sal)>11000;
+
+414->select comm,count(empno) from emp group by comm having count(comm)=0;
+
+415->select ename,sal,comm,(nvl(comm,0)+sal)*12 as annual_sal from emp; 
+

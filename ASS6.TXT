@@ -1,0 +1,47 @@
+1.select ename,empno from emp where sal=(select max(sal) from emp);
+
+2.select * from emp where deptno=(select deptno from emp where lower(ename)='martin');
+
+3.select * from emp where deptno in(select deptno from emp where lower(ename)='smith' or lower(ename)='allen');
+
+4.select * from emp where SAL > any(select sal from emp where lower(ename)='smith' or lower(ename)='allen');
+
+5.delete from emp1 where deptno=(select deptno from emp where lower(ename)='smith') and sal>1200;
+
+6.update emp11 set sal=(select sal from emp where ename='SMITH') where ename='JONES';
+
+7.select ename,job,deptno,sal from emp where job=(select job from emp where empno=7499);
+
+8.select ename,job,deptno,sal from emp where sal>(select sal from emp where empno=7499);
+
+9.select ename,sal,deptno from emp where sal in(select min(sal) from emp group by deptno);
+
+10.select count(*),to_char(hiredate,'YYYY') from emp where deptno=(select max(count(empno)) from emp group by deptno;------------------------------marked for review
+
+
+select max(count(empno)) from emp where hiredate=(select hiredate from emp where  group by deptno;
+
+11.select empno,ename,sal from emp e where sal>(select avg(sal) from emp d where e.deptno=d.deptno);
+
+12.select * from e
+
+13.select * from emp where sal in (select min(sal) from emp group by deptno);
+
+14.select * from emp where sal between(select min(sal) from emp) and 2500;
+
+15.select * from emp where sal>(select sal from emp where job='MANAGER');
+
+16.SELECT * FROM EMP WHERE SAL>ANY(SELECT MAX(SAL) FROM EMP);
+
+17.select * from emo where sal>all(select sal from emp where job='ANALYST';
+
+18.select * from emp where sal not in(select sal from emp where lower(job)='manager');
+
+19.select empno,ename,sal,case when lower(job)='clerk' then sal+0.15*sal 
+				when lower(job)='analyst' then sal+.12*sal 
+				when lower(job)='manager' then sal+.05*sal
+				else
+				 sal+0.8*sal
+			end as incsa
+from emp;
+

@@ -1,0 +1,86 @@
+--ass1-----
+create table vehicle(vid number,vname varchar2(15),price number,discount number,milage number,details varchar2(50));
+
+insert into vehicle values(1,'Activa',80000,10,35,'Two wheeler.Sturdy.Milage 30 km');
+insert into vehicle values(2,Santro,95000,20,20,'Product of Hyundai');
+insert into vehicle values(3,'Yamaha',160000,5,70,'Sturdy and good milage');
+insert into vehicle values(4,'i-10',300000,8,18,'Good small car');
+insert into vehicle values(5,'Wagon',250000,10,25,'Good milaghe car');
+insert into vehicle values(6,'Hero Splendor',75000,9,65,'Best bike');
+insert into vehicle values(7,'Royal Enfield',190000,5,40,'a royal bike');
+
+select vid "vehicle id",vname "vehicle name",price from vehicle;
+select *,vname as "Motor bike" from vehicle;
+update vehicle set price=80000 where price=75000;
+create table custome1 as select * from custome;
+select vid,vname,price,price-discount as "total price" from vehicle;
+select * from vehicle where price<100000;
+
+
+
+
+--ass2--
+create table custome(custid number,cname varchar2(15),location varchar2(15));
+
+insert into custome values(1,'Nilima','Pimpri');
+insert into custome values(2,'Ganesh','Pune');
+insert into custome values (3,'kishor','kothrud');
+insert into custome values(4,'Priya','Aundh');
+
+delete from custome where location='Pimpri';
+delete from table customer;
+
+--salesman--
+create table salesman(sid number,sname varchar2(15),city varchar2(15),experience number);
+insert into salesman values(10,'Rajesh','mumbai',5);
+insert into salesman values(11,'Seema','Pune',8);
+insert into salesman values(12,'Shailesh','Nagpur',7);
+insert into salesman values(13,'Rakhi','Pune',2);
+
+select sname from salesman where city='Pune';
+create table salesman1 as select * from salesman;
+delete from salesman;
+select * from salesman where experience>5;
+
+
+select * from vehicle,custome1;
+select * from custome;
+select * from custome1;
+select * from salesman;
+select * from salesman1;
+
+
+--employee--
+create table employe(eno number,ename varchar2(20),basic number,incentives number);
+
+insert into employe values(1,'Rajesh',20000,1500);
+insert into employe values(2,'Sarita',25000,1000);
+insert into employe values(3,'Meera',15000,3000);
+insert into employe values(4,'Jitesh',30000,500);
+insert into employe values(5,'Ramesh',12000,3000);
+
+select * from employe where basic>15000;
+update employe set incentives=1000 where ename='Jitesh';
+alter table employe modify column basic number(7,2);
+update employe set basic=basic+basic*0.05 where basic>20000;
+insert into employe(eno,ename,basic) values(20,'Ajay',16000);
+select * from employe where incentives=Null as 'not eligible';
+delete from employe where ename='Meera';
+alter table employe add job varchar2(12);
+insert into employe(job) values('devops');
+insert into employe(job) values('developer');
+insert into employe(job) values('analyst');
+insert into employe(job) values('cloud engineer');
+insert into employe(job) values('.net developer');
+
+alter table employe add total_sal number;
+update employe set total_Sal=basic+incentives;
+
+update employe set job='clerk';
+
+update employe set job='Head clerk' where ename='Ramesh';
+
+update employe set job='Analyst' where ename in ('Sarita','Jitesh');
+
+
+
